@@ -1,27 +1,17 @@
-import 'babel-register'
-
-import express from 'express'
 import fs from 'fs'
+import R from 'ramda'
 
-const Router = express.Router;
-const app = express();
-require('express-ws')(app);
+let requireFile = R.curry(
+    R.compose(
+        R.prop('default'),
+        require,
+        (path, file) => `./${path}/${file}`
+    )
+);
 
-function prepRouter(schema) {
-    let router = Router();
+let agents = fs.readdirSync('agents')
+    .map(file => [file.split('.')[0], requireFile('agents', file)]);
 
-    router.get('/', (res, req, next) => res.send("hey"));
-
-    router.ws('/', (ws, req) => {
-        ws.on('message', message => {
-            //fixme message
-        })
-    })
-}
-
-fs.readdirSync('agents')
-    .map(file => [file.split('.')[0], require(`./agents/${file}`)])
-    .map(([id, schema]) => [id, prepRouter(schema)])
-    .forEach(([id, router]) => app.use(`/${id}`, router));
-
-app.listen(80);
+fs.readdirSync('frontends')
+    .map(requireFile('frontends'))
+    .map(f => f(agents));
