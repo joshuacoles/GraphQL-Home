@@ -1,11 +1,5 @@
-import {
-    GraphQLBoolean as Boolean,
-    GraphQLString as String,
-    GraphQLInt as Int,
-} from 'graphql'
-
-import { interfaceType, objectType, enumType, schemaFrom, listOf, notNull } from 'graphql-schema';
-import { fullColourOf } from './service';
+import { Int, String, Boolean, objectType, notNull, listOf } from 'graphql-schema';
+import { fullColourOf } from './colourManager';
 
 import { Colour, ColourMode } from "./colour";
 
@@ -14,11 +8,13 @@ export const Light = objectType('Light')
     .field('name', String, 'The human readable name')
 
     .field('state', notNull(Boolean), 'On/Off state', native => native.state.on)
-    .field('brightness', notNull(Int), 'Brightness as a percentage', native => Math.floor((native.state.bri / 255) * 100))
+    .field('brightness', notNull(Int), 'Brightness as a percentage', native => Math.round((native.state.bri / 255) * 100))
 
-    .field('colour', notNull(Colour), 'Colour')
-    .arg('mode', ColourMode, 'unknown', 'The colour mode to request')
-    .resolve(fullColourOf)
+    .field('reachable', notNull(Boolean), 'If the light is reachable', native => native.state.reachable)
+
+    .field('colour', Colour, 'Colour')
+        .arg('mode', ColourMode, 'native', 'The colour mode to request')
+        .resolve(fullColourOf)
 
     .end();
 

@@ -1,14 +1,8 @@
-import {
-    GraphQLBoolean as Boolean,
-    GraphQLString as String,
-    GraphQLInt as Int,
-} from 'graphql'
+import { Float, Boolean, Int, String, objectType, schemaFrom, listOf, notNull } from 'graphql-schema';
 
-import { interfaceType, objectType, enumType, schemaFrom, listOf, notNull } from 'graphql-schema';
-
-import Light from './light';
+import { Light, AllLights } from './light';
 import Group from './group';
-import { GenericColourValue } from "./colour";
+import { ColourMode } from './colour.es6';
 import * as service from "./service";
 
 // /@formatter:off
@@ -21,6 +15,12 @@ const query = objectType('LightQuery')
         .arg('id', Int)
         .resolve(service.fetchGroup)
 
+    .field('lights', listOf(Light))
+        .resolve(service.fetchAllLights)
+
+    .field('groups', listOf(Group))
+        .resolve(service.fetchAllGroups)
+
     .end();
 
 const mutation = objectType('LightMutation')
@@ -29,14 +29,16 @@ const mutation = objectType('LightMutation')
         .arg('name', String)
         .arg('state', Boolean)
         .arg('brightness', Int)
-        .arg('colour', GenericColourValue)
+        .arg('colour', listOf(Float))
+        .arg('mode', ColourMode)
         .resolve(service.editLight)
 
     .field('editLightsInGroup', Light)
         .arg('groupId', notNull(Int))
         .arg('state', Boolean)
         .arg('brightness', Int)
-        .arg('colour', GenericColourValue)
+        .arg('colour', listOf(Float))
+        .arg('mode', ColourMode)
         .resolve(service.editLightsInGroup)
 
     .field('createGroup', Group)
@@ -68,3 +70,19 @@ const mutation = objectType('LightMutation')
 //@formatter:on
 
 export default schemaFrom(query, mutation)
+
+export function error(error) {
+    if (error.message.match(/resource, \/lights\/([0-9]+), not available/)) {
+        let id = error.message.match(/resource, \/lights\/([0-9]+), not available/)[1];
+
+        return {
+            error: 1,
+            message: `Light: ${id} is currently unreachable`
+        }
+    }
+
+    return {
+        error: -1,
+        message: ""
+    }
+}

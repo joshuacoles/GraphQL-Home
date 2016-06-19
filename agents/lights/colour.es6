@@ -1,32 +1,36 @@
-import {
-    GraphQLBoolean as Boolean,
-    GraphQLString as String,
-    GraphQLInt as Int,
-} from 'graphql'
+import { Float, objectType, enumType, listOf, notNull, inputType, String } from 'graphql-schema';
 
-import { interfaceType, objectType, enumType, schemaFrom, listOf, notNull } from 'graphql-schema';
 
 export const ColourMode = enumType('ColourMode', 'The different colour scopes that a light can have')
-    .value('UNKNOWN', 'unknown', 'Unknown')
-    .value('CT', 'ct', 'Colour Temperature')
-    .value('XY', 'xy', 'XY position of CIE colour space')
-    .end();
+    .value('native', 'native', 'The native colour mode for this light')
+    // .value('dimmable', 'dimmable', 'The colour mode used for if this light is only dimmable.')
 
-export const GenericColourValue = unionType('GenericColourValue', 'Can either represent an XY or CT colour value')
-    .type(Int)
-    .type(listOf(Int))
-    .resolveType(value => {
-        if (typeof value === 'number') return Int;
-        else if (_.isArray(value)) return listOf(Int);
-    }).end();
+    .value('ct', 'ct', 'Colour Temperature')
+    .value('xy', 'xy', 'XY position of CIE colour space')
+
+    .value('rgb', 'rgb', 'Standard RGB')
+    .value('hsl', 'hsl', 'Hue Saturation and Lightness')
+    .value('hsv', 'hsv', 'Hue Saturation and Value')
+    .value('hwb', 'hwb')
+    .value('cmyk', 'cmyk')
+    .value('xyz', 'xyz', 'XYZ positions in the CIE colour space')
+    .value('lab', 'lab')
+    .value('lch', 'lch')
+    .value('hcg', 'hcg')
+    .value('apple', 'apple', 'Apple Specific RGB values')
+    
+    .end();
 
 export const Colour = objectType('Colour', 'A colour in some scope')
-    .field('mode', notNull(ColourMode), 'The reqested scope of this colour')
-    .field('value', notNull(GenericColourValue), 'The value in the requested scope')
-    
-    .field('nativeMode', notNull(ColourMode), 'The native scope of this colour')
-    .field('nativeValue', notNull(GenericColourValue), 'The colour value of this light in its native scope')
-    
+    .field('mode', String, 'The requested scope of this colour')
+    .field('value', notNull(listOf(Float)), 'The value in the requested scope')
+
+    .field('nativeMode', String, 'The native scope of this colour')
+    .field('nativeValue', notNull(listOf(Float)), 'The colour value of this light in its native scope')
+
     .end();
+
+// export const ColourInput = inputType("Name")
+//     .arg(mode, ColourMode, (_, {}))
 
 export default Colour
