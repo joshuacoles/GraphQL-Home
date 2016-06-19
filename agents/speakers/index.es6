@@ -16,6 +16,7 @@ const query = objectType("SpeakerQuery")
 const mutation = objectType("SpeakerMutation")
     .field('editSpeaker', Speaker)
         .arg('name', String)
+        .arg('uuid', String)
         
         .arg('playing', Boolean)
         .arg('muted', Boolean)
