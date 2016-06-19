@@ -1,4 +1,4 @@
-import Remapper from '../../random/objectMapper'
+import Remapper from '../../lib/objectMapper'
 import converter from 'color-convert'
 
 const toLightStateRemapper = new Remapper()
