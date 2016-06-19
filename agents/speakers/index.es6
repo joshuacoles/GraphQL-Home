@@ -4,8 +4,11 @@ import * as service from './service';
 
 // /@formatter:off
 const query = objectType("SpeakerQuery")
+    .field('speakers', listOf(Speaker), service.speakers)
+
     .field('speaker', Speaker)
-        .arg('name', notNull(String))
+        .arg('name', String)
+        .arg('uuid', String)
         .resolve(service.speaker)
     
     .end();
