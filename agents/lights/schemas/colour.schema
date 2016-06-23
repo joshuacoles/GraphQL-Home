@@ -1,0 +1,39 @@
+enum ColourMode {
+    # The native colour mode for this light
+    native
+
+    # Colour Temperature
+    ct
+
+    # XY position of CIE colour space
+    xy
+
+    rgb
+    hsl
+    hsv
+    hwb
+    cmyk
+
+    # XYZ positions in the CIE colour space
+    xyz
+    lab
+    lch
+    hcg
+
+    # Apple Specific RGB values
+    apple
+}
+
+type Colour {
+    # The requested scope of this colour
+    mode: String
+
+    # The value in the requested scope
+    value: [Float]
+
+    # The native scope of this colour
+    nativeMode: String
+
+    # The colour value of this light in its native scope
+    nativeValue: String
+}

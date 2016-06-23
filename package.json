@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "amqplib": "^0.4.1",
+    "apollo-server": "^0.1.5",
     "babel-cli": "^6.8.0",
     "babel-register": "^6.8.0",
     "color-convert": "^1.4.1",
@@ -16,6 +17,7 @@
     "express-ws": "^2.0.0-rc.1",
     "graphql": "^0.6.0",
     "graphql-schema": "0.6.2",
+    "graphql-tools": "^0.6.0",
     "lodash": "^4.12.0",
     "node-hue-api": "^2.2.0",
     "ramda": "^0.21.0",

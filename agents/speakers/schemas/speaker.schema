@@ -1,0 +1,19 @@
+type Group {
+    id: Int
+    name: String
+    muted: Boolean
+    playing: Boolean
+    volume: Int
+    queue: Queue
+
+    speakers: [Speaker]
+}
+
+type Speaker {
+    id: Int
+    name: String
+    muted: Boolean
+    playing: Boolean
+    volume: Int
+    queue: Queue
+}

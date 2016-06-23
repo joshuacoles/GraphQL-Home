@@ -1,0 +1,19 @@
+type Track {
+    id: Int
+    title: String
+    duration: Int
+    uri: String
+    artist: String
+    album: String
+}
+
+type EnqueuedTrack {
+    id: Int
+    title: String
+    duration: Int
+    uri: String
+    artist: String
+    album: String
+
+    position: Int
+}

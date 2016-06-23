@@ -1,25 +1,28 @@
 import express from 'express'
-import graphqlHTTP from 'express-graphql'
+
+import { apolloServer } from 'apollo-server'
 
 const Router = express.Router;
 
 function prepRouter(schema) {
     let router = Router();
 
-    router.use('/ui', graphqlHTTP({
-        schema: schema,
-        graphiql: true,
-        formatError: error => {
-            console.log(error.stack);
+    router.use('/', apolloServer({
+            schema: schema,
+            graphiql: true,
+            pretty: true,
+            formatError: error => {
+                console.error(error.stack);
 
-            return ({
-                message: error.message,
-                locations: error.locations,
-                stack: error.stack
-            })
-        }
-    }));
-
+                return ({
+                    message: error.message,
+                    locations: error.locations,
+                    stack: error.stack
+                })
+            }
+        })
+    );
+    
     router.ws('/', (ws, req) => {
         ws.on('message', message => {
             console.log(message)

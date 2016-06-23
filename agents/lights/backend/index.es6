@@ -1,5 +1,5 @@
 import { HueApi } from 'node-hue-api'
-import { ip, username } from './hue.json'
+import { ip, username } from './creds.json'
 import R from 'ramda'
 import _ from 'lodash'
 

@@ -1,4 +1,4 @@
-import Remapper from '../../lib/objectMapper'
+import Remapper from '../../../lib/objectMapper'
 import converter from 'color-convert'
 
 const toLightStateRemapper = new Remapper()
@@ -66,32 +66,6 @@ export function fullColourOf(native, { mode: requestedMode }) {
             }   
         }
     }
-
-    // console.log(`Requested mode = ${requestedMode}`);
-    // let x = getNative(native);
-    // console.log(`Native info = ${x}`);
-    //
-    //
-    // console.log();
-    // return {
-    //     mode: "x", value: [1], nativeMode: "x", nativeValue: [1]
-    // };
-    // let requestedMode = args.mode;
-    //
-    // if (!native.state.reachable) {
-    //     console.log("HE")
-    //     return null;
-    // }
-    //
-    // let [nativeMode, nativeValue] = getNative(native);
-    // let [mode, value] = toRequested([nativeMode, nativeValue], requestedMode);
-    //
-    // return {
-    //     mode,
-    //     value,
-    //     nativeMode,
-    //     nativeValue
-    // }
 }
 
 function toLightState(native, props = {}) {

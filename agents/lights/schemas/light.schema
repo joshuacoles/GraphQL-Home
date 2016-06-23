@@ -1,0 +1,9 @@
+type Light {
+    id: Int
+    name: String
+    state: Boolean
+    brightness: Int
+    reachable: Boolean
+
+    colour(mode: ColourMode): Colour
+}

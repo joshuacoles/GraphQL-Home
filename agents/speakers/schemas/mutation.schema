@@ -1,0 +1,11 @@
+type SpeakerMutation {
+    editSpeaker(
+        name: String,
+        uuid: String,
+
+        playing: Boolean,
+        muted: Boolean,
+
+        volume: Int
+    ): Speaker
+}

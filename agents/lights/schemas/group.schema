@@ -1,0 +1,11 @@
+enum GroupType {
+    LightGroup
+    Room
+}
+
+type Group {
+    id: Int!
+    name: String!
+    type: GroupType!
+    lights: [Light!]!
+}
