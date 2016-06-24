@@ -19,7 +19,6 @@ const readResolvers = dir => fs.readdirSync(dir)
 
 function requireAgent(agent) {
     const typeDefinition = fs.readdirSync(path.join('agents', agent, 'schemas')).map(file => fs.readFileSync(path.join('agents', agent, 'schemas', file)).toString());
-    console.log(typeDefinition)
     const resolvers = readResolvers(path.join('agents', agent, 'resolvers'));
 
     return [agent, makeExecutableSchema({

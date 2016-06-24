@@ -1,3 +1,56 @@
+type LightQuery {
+    light(id: Int): Light
+    group(id: Int): Group
+
+    lights: [Light]
+    groups: [Group]
+}
+
+type LightMutation {
+    editLight(
+        id: Int!,
+        name: String,
+        state: Boolean
+        brightness: Int,
+        colour: [Float],
+        mode: ColourMode
+    ): Light
+
+    editLightsInGroup(
+        groupId: Int!,
+        state: Boolean
+        brightness: Int,
+        colour: [Float],
+        mode: ColourMode
+    ): Group
+
+    createGroup(
+        name: String!,
+        lights: [Int]!
+    ): Group
+
+    editGroup(
+        id: Int!,
+        name: String,
+        lights: [Int]
+    ): Group
+
+    deleteGroup(
+        id: Int!
+    ): Group
+
+    addLights(
+        name: String!,
+        lights: [Int]!
+    ): Group
+
+    removeLights(
+        name: String!,
+        lights: [Int]!
+    ): Group
+
+}
+
 schema {
   query: LightQuery,
   mutation: LightMutation

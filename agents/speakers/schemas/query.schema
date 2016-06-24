@@ -1,5 +1,0 @@
-type SpeakerQuery {
-    speakers: [Speaker]
-
-    speaker(name: String, uuid: String): Speaker
-}

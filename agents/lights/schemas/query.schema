@@ -1,7 +1,0 @@
-type LightQuery {
-    light(id: Int): Light
-    group(id: Int): Group
-
-    lights: [Light]
-    groups: [Group]
-}

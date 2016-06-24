@@ -1,3 +1,21 @@
+type SpeakerQuery {
+    speakers: [Speaker]
+
+    speaker(name: String, uuid: String): Speaker
+}
+
+type SpeakerMutation {
+    editSpeaker(
+        name: String,
+        uuid: String,
+
+        playing: Boolean,
+        muted: Boolean,
+
+        volume: Int
+    ): Speaker
+}
+
 schema {
   query: SpeakerQuery,
   mutation: SpeakerMutation

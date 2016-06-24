@@ -3,6 +3,7 @@ enum GroupType {
     Room
 }
 
+# A group of lights
 type Group {
     id: Int!
     name: String!
