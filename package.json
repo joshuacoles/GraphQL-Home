@@ -20,6 +20,7 @@
     "graphql-tools": "^0.6.0",
     "lodash": "^4.12.0",
     "node-hue-api": "^2.2.0",
+    "object-hash": "^1.1.2",
     "ramda": "^0.21.0",
     "sonos-discovery": "https://github.com/jishi/node-sonos-discovery/archive/v0.16.5.tar.gz"
   },

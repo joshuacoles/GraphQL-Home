@@ -1,6 +1,7 @@
 type Group {
-    id: Int
+    uuid: String
     name: String
+
     muted: Boolean
     playing: Boolean
     volume: Int
@@ -10,7 +11,7 @@ type Group {
 }
 
 type Speaker {
-    id: Int
+    uuid: String
     name: String
     muted: Boolean
     playing: Boolean

@@ -2,6 +2,10 @@ type SpeakerQuery {
     speakers: [Speaker]
 
     speaker(name: String, uuid: String): Speaker
+
+    groups: [Group]
+
+    group(uuid: String): Group
 }
 
 type SpeakerMutation {
@@ -14,6 +18,23 @@ type SpeakerMutation {
 
         volume: Int
     ): Speaker
+
+    createGroup(
+        uuid: String,
+        name: String,
+        initialQueue: Queue
+    ): Group
+
+    editGroup(
+        uuid: String,
+        name: String,
+        volume: Int,
+        playing: Boolean,
+        muted: Boolean,
+        queue: Queue
+    ): Group
+
+    removeGroup(uuid: String): Group
 }
 
 schema {

@@ -1,3 +1,1 @@
-import * as service from '../backend/index'
-
-export const editSpeaker = service.editSpeaker;
+export { editSpeaker, editGroup, removeGroup, createGroup } from '../backend/index'
