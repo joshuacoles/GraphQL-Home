@@ -20,9 +20,8 @@ type SpeakerMutation {
     ): Speaker
 
     createGroup(
-        uuid: String,
-        name: String,
-        initialQueue: Queue
+        name: String!,
+        ids: [String]!
     ): Group
 
     editGroup(
@@ -30,8 +29,8 @@ type SpeakerMutation {
         name: String,
         volume: Int,
         playing: Boolean,
-        muted: Boolean,
-        queue: Queue
+        muted: Boolean
+#        queue: Queue
     ): Group
 
     removeGroup(uuid: String): Group
