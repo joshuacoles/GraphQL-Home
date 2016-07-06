@@ -5,7 +5,7 @@ type Group {
     muted: Boolean
     playing: Boolean
     volume: Int
-    queue: Queue
+    #queue: Queue
 
     speakers: [Speaker]
 }
@@ -16,5 +16,5 @@ type Speaker {
     muted: Boolean
     playing: Boolean
     volume: Int
-    queue: Queue
+    #queue: Queue
 }
