@@ -68,7 +68,7 @@ export function fullColourOf(native, { mode: requestedMode }) {
     }
 }
 
-function toLightState(native, props = {}) {
+export function toLightState(native, props = {}) {
     let colourComponent =
         (props.mode && props.colour) ? toNative(native, props.mode, props.colour) : {};
 

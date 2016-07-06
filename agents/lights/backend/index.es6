@@ -2,6 +2,7 @@ import { HueApi } from 'node-hue-api'
 import { ip, username } from './creds.json'
 import R from 'ramda'
 import _ from 'lodash'
+import * as colourManager from './colourManager'
 
 const api = new HueApi(ip, username);
 
