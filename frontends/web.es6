@@ -22,7 +22,7 @@ function prepRouter(schema) {
             }
         })
     );
-    
+
     router.ws('/', (ws, req) => {
         ws.on('message', message => {
             console.log(message)
@@ -39,5 +39,5 @@ export default function (realms) {
     realms.map(([id, schema]) => [id, prepRouter(schema)])
           .forEach(([id, router]) => app.use(`/${id}`, router));
 
-    app.listen(3000)
+    app.listen(3001)
 }

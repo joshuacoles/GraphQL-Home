@@ -9,6 +9,7 @@ const api = new HueApi(ip, username);
 export const fetchLight = (_, { id }) => api.lightStatus(id).then(R.merge({ id }));
 export const fetchGroup = (_, { id }) => api.group(id);
 export const fetchAllLights = () => api.lights().then(({ lights }) => lights);
+
 export const fetchAllGroups = () => api.groups()
                                        .then(([_, ...groups]) => Promise.all([api.group(0), Promise.resolve(groups)]))
                                        .then(([first, rest]) => [first, ...rest]);
