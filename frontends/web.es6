@@ -1,4 +1,5 @@
 import express from 'express'
+import config from './web.config'
 
 import { apolloServer } from 'apollo-server'
 
@@ -39,5 +40,5 @@ export default function (realms) {
     realms.map(([id, schema]) => [id, prepRouter(schema)])
           .forEach(([id, router]) => app.use(`/${id}`, router));
 
-    app.listen(3001)
+    app.listen(config)
 }
