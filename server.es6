@@ -5,6 +5,10 @@ import R from 'ramda'
 
 import { makeExecutableSchema } from 'graphql-tools'
 
+import ShutdownHook from 'shutdown-hook'
+
+global.shutdownHook = new ShutdownHook({});
+
 let requireFile = R.curry(R.pipe(
     (path, file) => `./${path}/${file}`,
     require,
@@ -18,7 +22,9 @@ const readResolvers = dir => fs.readdirSync(dir)
                                .reduce(R.merge);
 
 function requireAgent(agent) {
-    const typeDefinition = fs.readdirSync(path.join('agents', agent, 'schemas')).map(file => fs.readFileSync(path.join('agents', agent, 'schemas', file)).toString());
+    const typeDefinition = fs.readdirSync(path.join('agents', agent, 'schemas'))
+                             .map(file => fs.readFileSync(path.join('agents', agent, 'schemas', file)).toString());
+
     const resolvers = readResolvers(path.join('agents', agent, 'resolvers'));
 
     return [agent, makeExecutableSchema({
@@ -31,5 +37,6 @@ let agents = fs.readdirSync('agents')
                .map(requireAgent);
 
 fs.readdirSync('frontends')
+  .filter(path => !(/config/.test(path)))
   .map(requireFile('frontends'))
   .map(f => f(agents));
